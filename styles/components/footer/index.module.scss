@@ -1,0 +1,99 @@
+@import '../../vars.scss';
+
+.footer {
+    min-height: 200px;
+    width: 100%;
+    background-color: $color;
+
+    * {
+        color: $color-invert;
+    }
+
+    .mainContainer {
+        max-width: 1150px;
+        margin: auto;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        .websiteData {
+            padding: 25px 0;
+
+            .icon {
+                font-size: 22px;
+                font-weight: bold;
+
+                a {
+                }
+            }
+
+            .description {
+                max-width: 360px;
+                padding: 16px 0;
+            }
+        }
+
+        .extraData {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: flex-start;
+
+            .extraDataContainer {
+                padding: 15px 50px;
+
+                h2 {
+                    font-size: 20px;
+                    padding: 8px 0;
+                }
+
+                .extraDataSection {
+                    .contact {
+                        padding: 3px 0;
+
+                        a {
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: start;
+                            align-items: center;
+
+                            cursor: pointer;
+
+                            text-align: center;
+
+                            img {
+                                width: 22px;
+                                margin-right: 10px;
+                            }
+
+                            span {
+                                text-align: center;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .copyrightContainer {
+        border-top: 1px solid $lightBorder;
+
+        .copyrightSection {
+            max-width: 1150px;
+            margin: auto;
+            padding: 6px 0;
+
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+
+            p {
+                font-size: 16px;
+            }
+        }
+    }
+}

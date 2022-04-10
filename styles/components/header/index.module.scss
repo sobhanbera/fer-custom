@@ -1,0 +1,57 @@
+@import '../../vars.scss';
+
+.header {
+    max-height: 55px;
+    height: 55px;
+    background-color: $primary;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    .mainContainer {
+        max-width: 1150px;
+        width: 1150px;
+        margin: auto;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        .iconArea {
+            p {
+                font-weight: bold;
+                font-size: 18px;
+
+                &:hover {
+                    font-size: 20px;
+                }
+
+                a {
+                }
+            }
+        }
+
+        .navigation {
+            ul {
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-end;
+                align-items: center;
+
+                li {
+                    a {
+                        padding: 6px 12px;
+                        margin: 4px;
+                        border-radius: 6px;
+                        &:hover {
+                            background: $bg;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
