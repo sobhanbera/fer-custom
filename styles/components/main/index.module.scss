@@ -1,0 +1,190 @@
+@import '../../vars.scss';
+
+.mainContainer {
+    min-height: 90vh;
+    max-width: 1150px;
+    padding: 100px 0;
+    margin: auto;
+
+    .workingArea {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+
+        .webcamContainer {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+
+            video {
+                border-radius: 8px;
+            }
+
+            button {
+                margin: 20px 0;
+                width: 300px;
+                background-color: $primary;
+                padding: 14px 12px;
+                border-radius: 6px;
+                font-size: 18px;
+                font-weight: bold;
+                cursor: pointer;
+
+                &:hover {
+                    transform: scale(1.01);
+                }
+
+                &:active {
+                    transform: scale(0.98);
+                }
+            }
+        }
+
+        .dataContainer {
+            min-width: 700px;
+
+            .resultsArea {
+                min-height: 300px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: flex-start;
+                border-radius: 6px;
+                background-color: $primary;
+
+                .results {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+
+                    padding: 8px 14px;
+
+                    p {
+                        font-size: 18px;
+                        font-weight: bold;
+
+                        &:first-child {
+                            font-weight: bold;
+                            font-size: 22px;
+                        }
+                    }
+
+                    .mainResults {
+                        padding: 12px 16px;
+
+                        .skeletonText {
+                            height: 16px;
+                            width: 380px;
+                            margin: 5px;
+                            border-radius: 2px;
+
+                            // just to randomize the width
+                            &:nth-child(1) {
+                                width: 300px;
+                            }
+
+                            &:nth-child(3) {
+                                width: 335px;
+                            }
+
+                            &:nth-child(5) {
+                                width: 390px;
+                            }
+                        }
+
+                        .resultText {
+                            p {
+                                font-size: 18px;
+                                font-weight: normal;
+                            }
+                        }
+                    }
+                }
+
+                .resultQueries {
+                    padding: 8px 14px;
+
+                    button {
+                        margin: 20px 0;
+                        min-width: 60px;
+                        margin: 6px 16px;
+                        background-color: $bg;
+                        padding: 8px 20px;
+                        border-radius: 6px;
+                        font-size: 18px;
+                        font-weight: bold;
+                        cursor: pointer;
+
+                        &:hover {
+                            transform: scale(1.01);
+                        }
+
+                        &:active {
+                            transform: scale(0.98);
+                        }
+
+                        &.feedbackBtn {
+                        }
+
+                        &.reportBtn {
+                            background-color: $accent;
+                        }
+                    }
+                }
+            }
+
+            .fileUploader {
+                width: 100%;
+                background-color: red;
+                margin: 20px 0;
+                padding: 14px 0px;
+                border-radius: 6px;
+
+                .input {
+                    background-color: blue;
+                    color: transparent;
+
+                    &::-webkit-file-upload-button {
+                        visibility: hidden;
+                    }
+                    &::before {
+                        content: 'Select some files';
+                        color: black;
+                        display: inline-block;
+                        background: -webkit-linear-gradient(
+                            top,
+                            #f9f9f9,
+                            #e3e3e3
+                        );
+                        border: 1px solid #999;
+                        border-radius: 3px;
+                        padding: 5px 8px;
+                        outline: none;
+                        white-space: nowrap;
+                        -webkit-user-select: none;
+                        cursor: pointer;
+                        text-shadow: 1px 1px #fff;
+                        font-weight: 700;
+                        font-size: 10pt;
+                    }
+                    &:hover::before {
+                        border-color: black;
+                    }
+                    &:active {
+                        outline: 0;
+                    }
+                    &:active::before {
+                        background: -webkit-linear-gradient(
+                            top,
+                            #e3e3e3,
+                            #f9f9f9
+                        );
+                    }
+                }
+            }
+        }
+    }
+}
