@@ -1,7 +1,7 @@
 @import '../../vars.scss';
 
 .mainContainer {
-    min-height: 90vh;
+    min-height: 65vh;
     max-width: 1150px;
     padding: 100px 0;
     margin: auto;
@@ -28,7 +28,7 @@
                 background-color: $primary;
                 padding: 14px 12px;
                 border-radius: 6px;
-                font-size: 18px;
+                font-size: 16px;
                 font-weight: bold;
                 cursor: pointer;
 
@@ -114,7 +114,7 @@
                         background-color: $bg;
                         padding: 8px 20px;
                         border-radius: 6px;
-                        font-size: 18px;
+                        font-size: 16px;
                         font-weight: bold;
                         cursor: pointer;
 
@@ -139,49 +139,77 @@
             .fileUploader {
                 width: 100%;
                 margin: 20px 0;
-                padding: 14px 0px;
                 border-radius: 6px;
 
                 input {
                     color: transparent;
+                    width: 100%;
 
                     &::-webkit-file-upload-button {
                         visibility: hidden;
                     }
                     &::before {
-                        content: 'Select Image File';
-                        color: black;
+                        width: 99.6%;
+                        text-align: center;
+                        padding: 14px 0;
+
+                        font-size: 18px;
+                        font-weight: bold;
+
+                        transition: all 0.35s;
+
+                        content: 'Select or Drag & Drop an Image here';
+                        color: white;
                         display: inline-block;
-                        background: -webkit-linear-gradient(
-                            top,
-                            #f9f9f9,
-                            #e3e3e3
-                        );
-                        border: 1px solid #999;
+                        background: $primary;
+                        border: 1px solid $primary;
                         border-radius: 3px;
-                        padding: 5px 8px;
                         outline: none;
                         white-space: nowrap;
                         -webkit-user-select: none;
                         cursor: pointer;
-                        text-shadow: 1px 1px #fff;
                         font-weight: 700;
                         font-size: 10pt;
                     }
                     &:hover::before {
-                        border-color: black;
+                        border-color: $primary;
+                        background-color: transparent;
                     }
-                    &:active {
+                    &:active,
+                    &:hover {
                         outline: 0;
                     }
-                    &:active::before {
-                        background: -webkit-linear-gradient(
-                            top,
-                            #e3e3e3,
-                            #f9f9f9
-                        );
+                    &:active::before,
+                    &:hover::before {
+                        background: transparent;
                     }
                 }
+            }
+        }
+    }
+
+    .displayImage {
+        margin: auto;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        img {
+            width: 360px;
+            height: 360px;
+
+            object-fit: contain;
+
+            margin: auto;
+
+            border-radius: 10px;
+
+            background-color: $primary;
+
+            &:hover {
+                transform: scale(1.2);
             }
         }
     }
