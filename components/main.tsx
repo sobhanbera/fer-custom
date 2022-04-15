@@ -6,40 +6,53 @@ import 'react-loading-skeleton/dist/skeleton.css'
 
 import styles from '../styles/components/main/index.module.scss'
 
+const emotion_dict = {
+    0: 'Angry',
+    1: 'Disgusted',
+    2: 'Fearful',
+    3: 'Happy',
+    4: 'Neutral',
+    5: 'Sad',
+    6: 'Surprised',
+}
+
 const Dimension = 300
 export default function MainContent(props) {
     const webcamRef = React.useRef(null)
 
     const [imageData, setImageData] = useState('')
     const [loading, setLoading] = useState(false)
-    const [data, setData] = useState({
-        mood: '',
-        id: 0,
-    })
+    const [mood, setMood] = useState(0)
 
     const capture = React.useCallback(
         (fileProvided: boolean = false, file: any = {}) => {
             if (fileProvided) {
-                console.log(file)
                 const formData = new FormData()
                 formData.append('file', file)
+                setLoading(true)
 
-                fetch('http://10.80.200.33:5000/predict', {
+                fetch('http://localhost:5000/predict', {
                     method: 'POST',
                     body: formData,
                 })
                     .then(res => res.json())
                     .then(res => {
-                        console.log(res)
+                        if (res.code === 'SUCCESS') {
+                            setMood(res.data)
+                        } else {
+                            alert('Error occurred!')
+                            setMood(0)
+                        }
+                        setLoading(false)
                     })
                     .catch(err => {
                         console.log(err)
+                        setLoading(false)
                     })
 
                 return
             }
 
-            console.log('AS')
             const imageSrc = webcamRef.current.getScreenshot()
             setImageData(imageSrc)
 
@@ -49,16 +62,23 @@ export default function MainContent(props) {
             const formData = new FormData()
             formData.append('file', imageBlob)
 
-            fetch('http://10.80.200.33:5000/predict', {
+            fetch('http://localhost:5000/predict', {
                 method: 'POST',
                 body: formData,
             })
                 .then(res => res.json())
                 .then(res => {
-                    console.log(res)
+                    if (res.code === 'SUCCESS') {
+                        setMood(res.data)
+                    } else {
+                        alert('Error occurred!')
+                        setMood(0)
+                    }
+                    setLoading(false)
                 })
                 .catch(err => {
                     console.log(err)
+                    setLoading(false)
                 })
 
             // const image = new Image()
@@ -104,9 +124,9 @@ export default function MainContent(props) {
                                         highlightColor={'#2f3847'}
                                         baseColor={'#3d5a80'}
                                     />
-                                ) : data.id >= 1 ? (
+                                ) : mood > 0 ? (
                                     <div className={styles.resultText}>
-                                        <p>Results loaded successfully...</p>
+                                        <p>Mood: {emotion_dict[mood]}</p>
                                     </div>
                                 ) : (
                                     <div className={styles.resultText}>
@@ -127,9 +147,10 @@ export default function MainContent(props) {
                     <div className={styles.fileUploader}>
                         <input
                             type="file"
+                            id="file"
                             multiple={false}
                             accept="image/jpeg"
-                            onChange={e => capture(true, e.target.value)}
+                            onChange={e => capture(true, e.target.files[0])}
                         />
                     </div>
                 </div>

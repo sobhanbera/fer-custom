@@ -138,20 +138,18 @@
 
             .fileUploader {
                 width: 100%;
-                background-color: red;
                 margin: 20px 0;
                 padding: 14px 0px;
                 border-radius: 6px;
 
-                .input {
-                    background-color: blue;
+                input {
                     color: transparent;
 
                     &::-webkit-file-upload-button {
                         visibility: hidden;
                     }
                     &::before {
-                        content: 'Select some files';
+                        content: 'Select Image File';
                         color: black;
                         display: inline-block;
                         background: -webkit-linear-gradient(
