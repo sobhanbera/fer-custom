@@ -10,7 +10,7 @@ const Dimension = 300
 export default function MainContent(props) {
     const webcamRef = React.useRef(null)
 
-    const [imageData, setImageData] = useState('')
+    const [imageData, setImageData] = useState([])
     const [loading, setLoading] = useState(false)
     const [data, setData] = useState({
         mood: '',
@@ -27,6 +27,9 @@ export default function MainContent(props) {
                 fetch('http://10.80.200.33:5000/predict', {
                     method: 'POST',
                     body: formData,
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                    },
                 })
                     .then(res => res.json())
                     .then(res => {
@@ -39,12 +42,14 @@ export default function MainContent(props) {
                 return
             }
 
-            console.log('AS')
             const imageSrc = webcamRef.current.getScreenshot()
-            setImageData(imageSrc)
+            console.log(imageSrc)
+            // setImageData(imageSrc)
 
             const fileParts = [imageSrc]
             const imageBlob = new Blob(fileParts, {type: 'image/jpeg'})
+            console.log(imageBlob)
+            return
 
             const formData = new FormData()
             formData.append('file', imageBlob)

@@ -776,6 +776,11 @@ file-entry-cache@^6.0.1:
   dependencies:
     flat-cache "^3.0.4"
 
+filepond@4.29.1:
+  version "4.29.1"
+  resolved "https://registry.yarnpkg.com/filepond/-/filepond-4.29.1.tgz#cd3d290091f96dca7f2db19c7dd485bf97ecb0be"
+  integrity sha512-j2YMYxzhDXYQScARkkYb5NwwfOxLWKWJK3v/Wozq1gQX3s5XLY3GfJhR9ysqP5l4697J3gIn898fRG5Z61UYIQ==
+
 fill-range@^7.0.1:
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/fill-range/-/fill-range-7.0.1.tgz#1919a6a7c75fe38b2c7c77e5198535da9acdda40"
@@ -1422,6 +1427,11 @@ react-dom@18.0.0:
   dependencies:
     loose-envify "^1.1.0"
     scheduler "^0.21.0"
+
+react-filepond@7.1.1:
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/react-filepond/-/react-filepond-7.1.1.tgz#467aa45051da5dbbca03a2ce58d2aacbbcfbb0e9"
+  integrity sha512-6Szyi3zY4AEiSlE5rztJov/xIDB107Sv31MctDoSutdLinMqmbMej6kJ2MtSGzAhsP2+h8cDDr51mdHNXt97Yw==
 
 react-is@^16.13.1:
   version "16.13.1"
