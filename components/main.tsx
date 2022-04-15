@@ -6,15 +6,16 @@ import 'react-loading-skeleton/dist/skeleton.css'
 
 import styles from '../styles/components/main/index.module.scss'
 
-const emotion_dict = {
-    0: 'Angry',
-    1: 'Disgusted',
-    2: 'Fearful',
-    3: 'Happy',
-    4: 'Neutral',
-    5: 'Sad',
-    6: 'Surprised',
-}
+const emotion_dict = [
+    'Angry',
+    'Disgusted',
+    'Fearful',
+    'Happy',
+    'Neutral',
+    'Sad',
+    'Surprised',
+    'Neutral',
+]
 
 const Dimension = 300
 export default function MainContent(props) {
@@ -26,6 +27,10 @@ export default function MainContent(props) {
 
     const capture = React.useCallback(
         (fileProvided: boolean = false, file: any = {}) => {
+            // if the file is not present
+            if (fileProvided && file == {})
+                return alert('Please select an image file or drag and drop.')
+
             if (fileProvided) {
                 const formData = new FormData()
                 formData.append('file', file)
@@ -34,55 +39,58 @@ export default function MainContent(props) {
                 fetch('http://localhost:5000/predict', {
                     method: 'POST',
                     body: formData,
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                    },
                 })
                     .then(res => res.json())
                     .then(res => {
                         if (res.code === 'SUCCESS') {
                             setMood(res.data)
+                            setImageData(res.image)
                         } else {
                             alert('Error occurred!')
                             setMood(0)
+                            setImageData('')
                         }
                         setLoading(false)
                     })
                     .catch(err => {
-                        console.log(err)
                         setLoading(false)
                     })
 
                 return
             }
 
-            const imageSrc = webcamRef.current.getScreenshot()
-            setImageData(imageSrc)
-
-            const fileParts = [imageSrc]
-            const imageBlob = new Blob(fileParts, {type: 'image/jpeg'})
+            setLoading(true)
+            const imageSrc = String(webcamRef.current.getScreenshot())
 
             const formData = new FormData()
-            formData.append('file', imageBlob)
+            formData.append('captured', 'true')
+            formData.append('imagedata', imageSrc)
 
             fetch('http://localhost:5000/predict', {
                 method: 'POST',
                 body: formData,
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                },
             })
                 .then(res => res.json())
                 .then(res => {
                     if (res.code === 'SUCCESS') {
                         setMood(res.data)
+                        setImageData(res.image)
                     } else {
                         alert('Error occurred!')
                         setMood(0)
+                        setImageData('')
                     }
                     setLoading(false)
                 })
                 .catch(err => {
-                    console.log(err)
                     setLoading(false)
                 })
-
-            // const image = new Image()
-            // image.src = imageSrc
         },
         [webcamRef],
     )
@@ -124,7 +132,7 @@ export default function MainContent(props) {
                                         highlightColor={'#2f3847'}
                                         baseColor={'#3d5a80'}
                                     />
-                                ) : mood > 0 ? (
+                                ) : mood >= 0 ? (
                                     <div className={styles.resultText}>
                                         <p>Mood: {emotion_dict[mood]}</p>
                                     </div>
@@ -154,6 +162,12 @@ export default function MainContent(props) {
                         />
                     </div>
                 </div>
+            </div>
+
+            <div className={styles.displayImage}>
+                {imageData && (
+                    <img src={imageData} width={'360px'} height={'360px'} />
+                )}
             </div>
         </div>
     )
